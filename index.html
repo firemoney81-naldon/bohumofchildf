@@ -1,23 +1,592 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- SEO Schema Markup for Insurance Service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "청소년실비보험 상담 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "청소년실비보험 비교센터",
+        "url": "https://yourdomain.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+82-10-1234-5678",
+          "contactType": "고객 서비스"
+        }
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "대한민국"
+      },
+      "description": "2026년 청소년실비보험 가입 필수 가이드. 비갱신형, 갱신형 비교부터 예상 보험료, 보장 범위, 가입 순위 추천까지 전문 상담을 제공합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "청소년 보험 상품 목록",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "단독형 실손보험"
+            },
+            "price": "10000",
+            "priceCurrency": "KRW",
+            "description": "순수 실손 보장만 제공하는 합리적인 보험 상품"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "종합형 어린이보험 (실손+특약)"
+            },
+            "price": "30000",
+            "priceCurrency": "KRW",
+            "description": "실손과 함께 3대 질병, 성장기 특약을 포함한 종합 보장 상품"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Google Fonts Noto Sans KR (for clean Korean text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+      /* --- Base Styles --- */
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.8;
+        background-color: #f5f8ff; /* Soft blue background */
+        color: #333;
+      }
+      header {
+        background-color: #0066cc; /* Professional blue header */
+        color: white;
+        padding: 2rem 1rem;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1rem;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease, transform 0.3s ease;
+        padding-bottom: 0.2rem;
+      }
+      nav a:hover {
+        color: #ffcc00; /* Yellow accent on hover */
+        border-bottom: 2px solid #ffcc00;
+      }
+      main {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      /* --- Section Styling --- */
+      section {
+        background-color: white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      }
+      h1, h2 {
+        color: #004080;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+      h2 {
+        margin-top: 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #eee;
+      }
+      h3 {
+        color: #0066cc;
+        border-left: 4px solid #0066cc;
+        padding-left: 1rem;
+      }
+
+      /* --- Keyword Tags --- */
+      .keyword-tags {
+        margin: 1.5rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 0.9rem;
+      }
+      .keyword-tags a {
+        background-color: #eaf4ff; /* Light blue tag background */
+        color: #0066cc;
+        padding: 8px 16px;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      .keyword-tags a:hover {
+        background-color: #cce0ff;
+      }
+
+      /* --- Table Styling --- */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+        overflow: hidden; /* For rounded corners */
+      }
+      th, td {
+        padding: 1rem 1.2rem;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        background-color: #0066cc;
+        color: white;
+        font-weight: 500;
+      }
+      td {
+        background-color: #f9f9f9;
+      }
+      tr:nth-child(even) td {
+        background-color: #f2f2f2;
+      }
+
+      /* --- Call to Action Button --- */
+      .cta-button {
+        display: inline-block;
+        background-color: #ff9900; /* Orange accent color */
+        color: white;
+        font-weight: 700;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        margin: 1rem 0;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .cta-button:hover {
+        background-color: #e68a00;
+        transform: translateY(-2px);
+      }
+
+      /* --- Engagement Forms --- */
+      form {
+        background-color: #eaf4ff;
+        border: 1px solid #cce0ff;
+        padding: 2rem;
+        border-radius: 10px;
+      }
+      form label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #004080;
+      }
+      form input[type="text"], form input[type="tel"], form select {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      form button {
+        background-color: #0077c2;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 700;
+        transition: background-color 0.3s ease;
+      }
+      form button:hover {
+        background-color: #005f9e;
+      }
+
+      /* --- FAQ Styling --- */
+      dl dt {
+        font-weight: 700;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background-color: #f2f7ff;
+        border: 1px solid #e0eaff;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #004080;
+        transition: background-color 0.3s ease;
+      }
+      dl dt:hover {
+        background-color: #eaf4ff;
+      }
+      dl dd {
+        margin-left: 0;
+        padding: 1rem;
+        margin-top: 0.5rem;
+        background-color: white;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        line-height: 1.6;
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      dl dt.active + dd {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* --- Footer Styling --- */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+        background-color: #eaf4ff;
+        margin-top: 2rem;
+      }
+      footer a {
+        color: #0066cc;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>청소년실비보험 가입 조건 및 가격 비교 2026</h1>
+        <nav>
+            <ul>
+                <li><a href="#intro">실비보험이란?</a></li>
+                <li><a href="#coverage">보장 범위 분석</a></li>
+                <li><a href="#comparison">갱신형 vs 비갱신형</a></li>
+                <li><a href="#price-guide">예상 보험료 및 가격</a></li>
+                <li><a href="#signup-guide">가입 순위 및 팁</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section id="intro">
+            <h2>청소년실비보험, 왜 지금 준비해야 할까요?</h2>
+            <p><strong>청소년실비보험</strong>은 성장기 자녀의 건강을 위한 필수적인 안전망입니다. 활동량이 많아지는 청소년기는 예기치 않은 사고나 상해에 노출될 위험이 높습니다. 또한, 잦은 감기나 알레르기, 아토피, 성장통 관련 질환 등 잔병치레로 인해 병원 방문이 잦아지는 시기이기도 합니다. 국민건강보험이 적용되지 않는 비급여 항목에 대한 지출 부담이 꾸준히 증가하고 있어, 실질적인 의료비 지출을 보장받을 수 있는 실비보험 가입은 선택이 아닌 필수가 되고 있습니다.</p>
+            <p><strong>청소년실비보험</strong>은 자녀의 신체적, 정신적 발달을 돕는 다양한 특약을 함께 구성할 수 있습니다. 2026년 기준으로 실손보험 제도가 변화하고 있으며, 보험료 인상 폭에 대한 우려도 커지고 있습니다. 따라서 건강할 때 미리 가입하여 안정적인 보험료로 장기간 보장받는 것이 중요합니다. 이 가이드에서는 청소년기 자녀를 위한 <strong>실비보험 가입</strong> 시 반드시 확인해야 할 사항들을 상세하게 안내해 드립니다.</p>
+
+            <div class="keyword-tags" aria-label="연관 키워드">
+                <a href="#price-guide">청소년실비보험 비용</a>
+                <a href="#comparison">청소년실비보험 장단점</a>
+                <a href="#signup-guide">청소년실비보험 추천</a>
+                <a href="#price-guide">실비보험 저렴한곳</a>
+                <a href="#signup-guide">청소년실비보험 순위</a>
+                <a href="#coverage">청소년 실비보험 보장 범위</a>
+                <a href="#comparison">갱신형 비갱신형 차이점</a>
+                <a href="#contact">청소년실비보험 견적</a>
+                <a href="#price-guide">실비보험 평균 금액</a>
+            </div>
+        </section>
+
+        <section id="coverage">
+            <h2>청소년실비보험 보장 범위 및 특징 심층 분석</h2>
+            <p><strong>청소년실비보험</strong>의 핵심은 의료비 지출을 실질적으로 보장해주는 것입니다. 크게 입원, 통원, 약제비 보장으로 나뉘며, 청소년기에 특히 유용한 특약들을 함께 고려해야 합니다.</p>
+            <h3>1. 실비보험 핵심 보장 (기본 보장)</h3>
+            <ul>
+                <li><strong>입원 치료비:</strong> 질병이나 상해로 입원했을 때 발생하는 병원비, 수술비, 검사비 등을 보장합니다. 청소년은 활동량이 많아 골절 등 상해 위험이 높으므로 입원 치료비 보장은 필수입니다.</li>
+                <li><strong>통원 치료비:</strong> 감기, 알레르기 등 가벼운 질환으로 병원이나 의원에 방문할 때 발생하는 외래 진료비와 처방전으로 인한 약제비를 보장합니다. 청소년기에는 잦은 통원 치료가 발생하므로 이 부분의 보장 한도를 잘 확인해야 합니다.</li>
+            </ul>
+
+            <h3>2. 청소년에게 필수적인 특약 (종합형 보험)</h3>
+            <p>실비보험 단독 상품만으로는 청소년기에 발생 가능한 모든 위험에 대비하기 어렵습니다. <strong>종합형 어린이보험</strong>을 통해 실비와 함께 주요 질병 특약을 구성하는 것이 일반적입니다. 특히 <strong>청소년기</strong>에는 다음과 같은 특약들을 고려해볼 수 있습니다.</p>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>특약 종류</th>
+                        <th>상세 보장 내용</th>
+                        <th>필요성 (청소년기 기준)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3대 질병 진단비</td>
+                        <td>암, 뇌혈관질환, 허혈성심장질환 진단 시 고액 진단비 지급 (비갱신형 추천)</td>
+                        <td>성장기 중대 질병 발병 시 고액 치료비 대비 (특히 소아암 관련)</td>
+                    </tr>
+                    <tr>
+                        <td>상해 골절/화상 진단비</td>
+                        <td>골절 또는 화상 진단 시 정액 지급</td>
+                        <td>운동 및 활동 중 부상 위험이 높은 청소년기에 유용</td>
+                    </tr>
+                    <tr>
+                        <td>일상생활 배상책임</td>
+                        <td>자녀의 과실로 타인에게 피해를 입혔을 때 보상</td>
+                        <td>학교, 학원 등 단체 생활 중 실수로 인한 배상 책임 대비</td>
+                    </tr>
+                    <tr>
+                        <td>정신 건강 치료 특약</td>
+                        <td>ADHD, 우울증, 불안 장애 등 정신과 치료비 보장</td>
+                        <td>학업 스트레스로 인한 정신 건강 문제 증가 추세에 대비</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>참고:</strong> 실손보험은 표준화된 보장 내용을 따르므로, 여러 보험사를 비교하여 <strong>가장 유리한 특약 조합</strong>을 찾는 것이 중요합니다.</p>
+        </section>
+
+        <section id="comparison">
+            <h2>갱신형 vs 비갱신형: 청소년실비보험 가입 시 장단점 비교</h2>
+            <p>청소년실비보험을 선택할 때 가장 중요한 고민 중 하나는 <strong>갱신형</strong>과 <strong>비갱신형</strong> 중 어떤 것을 선택할지입니다. 두 가지 유형은 보험료 납입 방식과 보장 기간에 큰 차이가 있으므로, 자녀의 장기적인 재정 계획에 맞춰 신중하게 결정해야 합니다.</p>
+
+            <h3>1. 갱신형 보험의 장점과 단점</h3>
+            <p><strong>갱신형 보험</strong>은 일정 기간(보통 1년 또는 3년)마다 보험료가 재산정되는 방식입니다. 초기 보험료가 <strong>저렴한곳</strong>이 많아 당장의 경제적 부담을 줄일 수 있습니다. 그러나 갱신 시점에 나이 증가, 물가 상승, 의료수가 변동, 손해율 악화 등의 요인으로 인해 <strong>보험료 인상</strong>이 발생할 수 있습니다. 특히 <strong>2026년 실손보험료 평균 인상률</strong>은 4세대 실손보험 기준으로 20% 내외로 예상되고 있어, 갱신형 가입자는 장기적인 보험료 지출에 대한 면밀한 계획이 필요합니다.</p>
+            <ul>
+                <li><strong>장점:</strong> 초기 보험료 부담이 적어 <strong>저렴한 가격</strong>으로 가입 가능.</li>
+                <li><strong>단점:</strong> 갱신 시 보험료가 지속적으로 상승할 수 있어 장기적인 총 납입액은 더 높을 수 있음. 특히 노년기에 급격한 인상이 발생할 위험이 있습니다.</li>
+            </ul>
+
+            <h3>2. 비갱신형 보험의 장점과 단점</h3>
+            <p><strong>비갱신형 보험</strong>은 가입 시 확정된 보험료를 만기까지 동일하게 유지하는 방식입니다. 초기 보험료는 갱신형보다 높지만, 납입 기간이 정해져 있어(예: 20년 납입 100세 만기) 납입 기간 이후에는 보험료 부담이 사라집니다. 장기적으로 보았을 때 <strong>총 납입액</strong>이 갱신형보다 적은 경우가 많습니다.</p>
+            <ul>
+                <li><strong>장점:</strong> 보험료 변동 없이 안정적인 지출 계획이 가능하며, 장기적으로 <strong>총 보험료 금액</strong>이 <strong>저렴</strong>할 수 있습니다.</li>
+                <li><strong>단점:</strong> 가입 초기 <strong>예상 금액</strong>이 높을 수 있으며, 중도 해지 시 환급금이 적거나 없을 수 있습니다.</li>
+            </ul>
+
+            <h3>3. 청소년기 자녀를 위한 선택 가이드 (장단점 비교)</h3>
+            <p>청소년기 자녀의 <strong>실비보험 가입</strong> 시점은 빠를수록 유리합니다. 건강할 때 가입해야 <strong>보험료</strong>가 낮고, 보장 조건이 좋기 때문입니다. <strong>비갱신형</strong>은 장기적인 관점에서 유리하지만, <strong>갱신형</strong>은 당장의 재정 상황에 맞춰 유연하게 선택할 수 있습니다.</p>
+            <table class="styled-table comparison-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>갱신형 실비보험</th>
+                        <th>비갱신형 (종합보험 특약)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>초기 보험료</strong></td>
+                        <td>상대적으로 저렴함 (월 1~2만원대)</td>
+                        <td>상대적으로 높음 (월 3~5만원대 이상)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>보험료 변동</strong></td>
+                        <td>갱신 주기(1년/3년/5년)마다 변동 (인상 가능성 높음)</td>
+                        <td>가입 시점부터 만기까지 고정 (납입 기간 후 납부 종료)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>장기 총 납입액</strong></td>
+                        <td>갱신 시점에 따라 인상되어 총액이 높을 수 있음</td>
+                        <td>납입 기간이 정해져 있어 총액 예측 가능</td>
+                    </tr>
+                    <tr>
+                        <td><strong>추천 대상</strong></td>
+                        <td>단기적인 부담을 줄이고 싶은 경우, 소득이 일정하지 않은 경우</td>
+                        <td>장기적으로 안정적인 보장을 원하는 경우, 소득이 충분한 경우</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="price-guide">
+            <h2>2026 청소년실비보험 예상 보험료 및 가격 결정 요인</h2>
+            <p><strong>청소년실비보험료</strong>는 가입 시점의 나이, 성별, 가입 상품의 종류(단독형/종합형), 특약 구성에 따라 크게 달라집니다. 특히 <strong>2026년</strong>에는 실손보험 갱신 주기가 도래하는 가입자들에게 평균 7.8%의 보험료 인상이 예고되고 있습니다.</p>
+
+            <h3>1. 청소년실비보험 평균 금액</h3>
+            <p>일반적으로 <strong>청소년 실비보험</strong>은 성인보다 보험료가 저렴합니다. 10대 자녀의 경우, 단독 실비보험만 가입할 경우 월 1만원 내외의 <strong>저렴한 보험료</strong>로 가입이 가능합니다. 그러나 3대 질병 진단비, 상해 특약 등을 추가하는 종합형 보험으로 가입할 경우 <strong>예상 금액</strong>은 월 3~5만원 수준으로 올라갈 수 있습니다. 보험사별로 제공하는 할인 특약(예: 무해지환급형)이나 가족 단위 가입 시 할인 혜택 등을 활용하면 <strong>저렴한곳</strong>을 찾을 수 있습니다.</p>
+            <p><strong>청소년실비보험 가격</strong>은 다음 요소에 따라 달라집니다:</p>
+            <table class="styled-table price-factor-table">
+                <thead>
+                    <tr>
+                        <th>요인</th>
+                        <th>설명</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>나이</strong></td>
+                        <td>어릴수록 보험료가 저렴합니다. 10대 초반에 가입하는 것이 가장 유리합니다.</td>
+                        <td>건강할 때 가입하는 것이 중요합니다.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>건강 상태</strong></td>
+                        <td>과거 치료 이력, 질병 유무에 따라 가입 거절 또는 보장 제한(부담보)이 있을 수 있습니다.</td>
+                        <td>병력 고지 의무를 반드시 지켜야 합니다.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>가입 형태</strong></td>
+                        <td>단독 실비보험은 저렴하지만, 종합형은 보장 범위가 넓습니다.</td>
+                        <td>자녀의 건강 리스크에 맞춰 선택해야 합니다.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2. 2026년 실손보험료 인상 요인과 대응 방안</h3>
+            <p>최근 실손보험료 인상 요인은 비급여 항목의 과잉 진료(도수치료, 주사치료 등) 때문입니다. 특히 4세대 실손보험은 의료 이용량에 따라 보험료가 할인되거나 할증되는 구조를 가지고 있습니다. <strong>2026년 실손보험료</strong>가 인상되더라도, 청소년기에는 병원 이용이 적은 편이므로, 4세대 실손보험의 경우 무사고 할인을 받을 수 있는 가능성이 높습니다. 따라서 자녀가 건강하다면 4세대 실비보험을 신규 가입하는 것이 합리적일 수 있습니다.</p>
+
+            <!-- Input Form for Dwell Time and User Engagement -->
+            <form action="#contact" method="post" id="calculator-form">
+                <h4>빠른 보험료 예상 계산기</h4>
+                <p>간단한 정보 입력으로 자녀의 <strong>청소년실비보험 예상 금액</strong>을 확인해 보세요.</p>
+                <label for="age">자녀 나이 (만 나이)</label>
+                <input type="number" id="age" name="age" min="0" max="19" required>
+                <label for="gender">성별</label>
+                <select id="gender" name="gender" required>
+                    <option value="">-- 선택 --</option>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                </select>
+                <label for="coverage-type">가입 유형</label>
+                <select id="coverage-type" name="coverage-type" required>
+                    <option value="">-- 선택 --</option>
+                    <option value="standard">단독 실비 (저렴한곳)</option>
+                    <option value="comprehensive">종합형 (실비+3대질병)</option>
+                </select>
+                <button type="submit">예상 보험료 확인하기</button>
+            </form>
+        </section>
+
+        <section id="signup-guide">
+            <h2>청소년실비보험 가입 순위 및 추천 상품 선택 팁</h2>
+            <p>자녀를 위한 <strong>청소년실비보험 추천</strong> 상품을 찾을 때, 단순히 <strong>가입 순위</strong>나 <strong>내돈내산 후기</strong>만 보고 결정해서는 안 됩니다. 각 보험사의 상품별로 특약 구성과 보장 한도가 다르기 때문에, 우리 아이에게 꼭 필요한 보장을 중심으로 설계하는 것이 중요합니다.</p>
+
+            <h3>1. 가입 시 고려해야 할 핵심 요소</h3>
+            <ul>
+                <li><strong>성장기 위험 대비:</strong> 청소년기는 활동량이 많아 상해 위험이 높으므로, 골절이나 화상, 스포츠 상해 특약을 충분히 확보해야 합니다.</li>
+                <li><strong>소아암 등 중대 질병:</strong> 3대 질병 중 특히 소아암 진단비 보장은 고액의 치료비가 발생하므로 꼼꼼히 확인해야 합니다.</li>
+                <li><strong>비갱신형 선택:</strong> 청소년기는 보험료 납입 기간이 긴 만큼, 비갱신형을 선택하는 것이 장기적인 관점에서 유리합니다.</li>
+                <li><strong>치과 치료:</strong> 청소년기에 치아 교정을 하는 경우가 많습니다. 비급여 항목인 치과 치료는 실비보험 기본 보장에서 제외되므로, 치과 특약 가입 여부를 신중하게 결정해야 합니다.</li>
+            </ul>
+
+            <h3>2. 청소년실비보험 가입 절차 및 주의사항</h3>
+            <p>자녀가 미성년자일 경우 부모님이 계약자가 되며, 피보험자는 자녀가 됩니다. 가입 시 자녀의 건강 상태 고지 의무는 반드시 지켜야 합니다. 만약 고지 의무를 위반할 경우 보험금 지급이 거절될 수 있습니다.</p>
+            <ul>
+                <li><strong>고지 의무:</strong> 최근 1년 내 입원 이력, 만성 질환 치료 여부 등을 솔직하게 고지해야 합니다.</li>
+                <li><strong>보장 제외(부담보):</strong> 과거 병력으로 인해 특정 부위나 질환에 대한 보장이 제외되는 경우가 있을 수 있으므로 약관을 꼼꼼히 확인해야 합니다.</li>
+                <li><strong>성인 전환:</strong> 자녀가 성인이 되었을 때 계약자 명의 변경을 해야 합니다.</li>
+            </ul>
+
+            <!-- Internal Link Block -->
+            <div class="keyword-tags internal-links">
+                <a href="#coverage">보장 범위 자세히 보기</a>
+                <a href="#price-guide">보험료 계산기 바로가기</a>
+                <a href="#faq">FAQ 확인하기</a>
+            </div>
+
+            <p><strong>내돈내산 후기</strong>나 <strong>추천 순위</strong>를 참고하는 것도 좋지만, 결국 자녀의 건강 상태와 가정의 재정 상황에 맞춰 설계해야 후회 없는 선택을 할 수 있습니다. 여러 보험사의 상품을 비교하는 것이 <strong>저렴한곳</strong>을 찾는 가장 확실한 방법입니다.</p>
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">Q1: 청소년실비보험과 어린이보험은 무엇이 다른가요?</dt>
+                <dd><strong>청소년실비보험</strong>은 실손의료비 보장을 중심으로 하는 상품을 말하며, <strong>어린이보험</strong>은 실손 보장과 함께 진단비, 상해 특약 등을 포함한 종합적인 보험을 의미합니다. 청소년실비보험은 기본적으로 단독 실손 상품을 의미하지만, 넓은 의미에서는 종합형 어린이보험 내 실손 특약을 포함하기도 합니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q2: 청소년실비보험 가입 시기가 따로 있나요?</dt>
+                <dd>가장 좋은 가입 시기는 아이가 태어난 직후부터 건강할 때입니다. 청소년기에 접어든 자녀라면, 건강 상태가 나빠지기 전에 가입하는 것이 중요합니다. 건강할수록 <strong>보험료</strong>가 <strong>저렴</strong>하며, 보장 범위가 넓습니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q3: 치과 치료도 실비보험으로 보장되나요?</dt>
+                <dd>국민건강보험이 적용되지 않는 비급여 항목인 치과 치료(충치 치료, 교정 등)는 실비보험 기본 보장에서 제외됩니다. 다만, 상해로 인한 치과 치료는 보장될 수 있습니다. 필요하다면 치과 치료 보장 특약을 별도로 추가해야 합니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q4: 갱신형이 좋을까요? 비갱신형이 좋을까요?</dt>
+                <dd>갱신형은 초기 <strong>보험료</strong>가 <strong>저렴한 장점</strong>이 있지만, 장기적으로 <strong>보험료 인상</strong> 위험이 있습니다. 비갱신형은 초기 보험료는 높지만, <strong>장기간 고정 금액</strong>으로 안정적인 재정 계획이 가능합니다. 자녀의 보험은 장기간 유지하는 것이 일반적이므로, 비갱신형을 추천하는 경우가 많습니다.</dd>
+                <dt tabindex="0" aria-expanded="false">Q5: 청소년실비보험 가입 시 병원 진료 기록이 있으면 불리한가요?</dt>
+                <dd>병원 진료 기록이 있다고 무조건 가입이 거절되는 것은 아닙니다. 경미한 질병이나 일회성 치료의 경우 큰 문제가 되지 않습니다. 다만, 만성 질환이나 중증 질병의 경우 <strong>가입 조건</strong>이 까다로워질 수 있습니다. 여러 보험사를 비교하여 <strong>가장 유리한 조건</strong>을 제시하는 곳을 선택해야 합니다.</dd>
+            </dl>
+        </section>
+
+        <section id="contact">
+            <h2>무료 보험 상담 및 견적 문의</h2>
+            <p><strong>청소년실비보험</strong>, <strong>어린이보험</strong>, <strong>실비보험 가격</strong> 등 복잡한 보험 용어 때문에 혼자 고민하고 계신가요? <strong>청소년실비보험</strong>은 자녀의 미래를 위한 투자입니다. 전문 상담사와 함께라면 우리 아이에게 꼭 맞는 맞춤형 설계를 받을 수 있습니다. <strong>가입 순위</strong>나 <strong>예상 금액</strong>에 대한 궁금증을 해결하고 <strong>저렴한곳</strong>을 찾아보세요.</p>
+
+            <!-- Comprehensive Contact Form -->
+            <form action="#contact-submit" method="post">
+                <h4>1:1 맞춤형 무료 견적 상담 신청</h4>
+                <div style="margin-bottom: 1rem;">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" placeholder="이름을 입력해 주세요" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="phone">연락처:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="예: 010-1234-5678" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="child-age">자녀 생년월일:</label>
+                    <input type="text" id="child-age" name="child-age" placeholder="예: 2010.05.01" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="consultation-type">상담 희망 내용:</label>
+                    <select id="consultation-type" name="consultation-type" required>
+                        <option value="">-- 선택 --</option>
+                        <option value="premium_check">보험료 견적 확인</option>
+                        <option value="product_recommend">상품 비교 및 추천</option>
+                        <option value="renewal_inquiry">기존 보험 리모델링</option>
+                        <option value="other">기타 문의</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <input type="checkbox" id="privacy-agree" name="privacy-agree" required>
+                    <label for="privacy-agree" style="display: inline; font-weight: normal; font-size: 0.9rem;">개인정보 수집 및 이용 동의 (필수)</label>
+                </div>
+                <button type="submit">무료 상담 신청</button>
+            </form>
+            <p style="text-align: center; margin-top: 2rem;">상담 전화: <strong>010-1234-5678</strong></p>
+        </section>
+
+        <section id="external-links">
+            <h2>공신력 있는 정보 출처 (참고 자료)</h2>
+            <p><strong>청소년실비보험</strong>에 대한 정확한 정보는 공신력 있는 기관의 자료를 통해 확인하는 것이 중요합니다. 아래는 보험 가입 시 참고할 수 있는 외부 링크입니다.</p>
+            <ul>
+                <li><a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a>: 보험 상품 정보 및 민원 안내 (보험 관련 제도 및 소비자 보호 정보)</li>
+                <li><a href="https://www.nhis.or.kr/" target="_blank">국민건강보험공단 (NHIS)</a>: 건강보험 보장 범위 및 의료비 지원 제도 확인 (급여 항목 확인)</li>
+                <li><a href="https://terms.naver.com/entry.naver?docId=2072703&cid=43667&categoryId=43667" target="_blank">네이버 지식백과 - 실손의료보험</a>: 실손의료보험의 정의 및 특징 (보험 기초 지식)</li>
+                <li><a href="https://www.kidi.or.kr/" target="_blank">보험연구원 (KIDI)</a>: 보험 산업 동향 및 통계 자료 (보험 시장 분석)</li>
+                <li><a href="https://www.ins.or.kr/" target="_blank">생명보험협회/손해보험협회</a>: 보험 상품 비교 공시 (상품 비교)</li>
+            </ul>
+        </section>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>※ 본 페이지에 명시된 모든 정보는 청소년실비보험 가입에 대한 일반적인 가이드라인이며, 구체적인 계약 조건 및 <strong>보험료 금액</strong>은 각 보험사 약관에 따라 달라질 수 있습니다.</p>
+        <p>&copy; 2026 청소년실비보험 비교센터. 모든 권리 보유. | <a href="#privacy">개인정보처리방침</a></p>
+    </footer>
+
+    <!-- JavaScript for FAQ Accordion -->
+    <script>
+      document.querySelectorAll('dl dt').forEach((dt) => {
+        dt.addEventListener('click', () => {
+          dt.classList.toggle('active');
+          let expanded = dt.getAttribute('aria-expanded') === 'true';
+          dt.setAttribute('aria-expanded', !expanded);
+          // Collapse other active items (optional feature)
+          document.querySelectorAll('dl dt.active').forEach((otherDt) => {
+            if (otherDt !== dt) {
+              otherDt.classList.remove('active');
+              otherDt.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+        dt.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            dt.click();
+          }
+        });
+      });
+    </script>
+
+
+  
